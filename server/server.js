@@ -32,12 +32,6 @@ setInterval(function(){
   });
 }, 9000000)
 
-app.get('/scrape', function(req, res) {
-  scraper(function(){
-    res.end();
-  });
-});
-
 app.get('/api/entities', function(req, res){
   console.log('sending cache');
   res.json(scraperCache.data);
