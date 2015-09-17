@@ -2,7 +2,7 @@
 var mongoose = require( 'mongoose' ); 
 
 // Build the connection string 
-var dbURI = 'mongodb://localhost/whoisnews'; 
+var dbURI = process.env.MONGOLAB_URI || 'mongodb://localhost/whoisnews'; 
 
 // Create the database connection 
 var db = mongoose.connect(dbURI); 
