@@ -21,9 +21,16 @@ Entity.find({}, null, {sort: '-count', limit:275}, function(err, data){
   scraperCache.data = data;
 });
 
-// Scrape the news every 2.5 hours
-// 9000000 ms
+// If just deployed, then scrape the news
+if(process.env.DEPLOY && process.env.DEPLOY === 'production'){
+  Entity.remove({}, function(err){
+    console.log('starting scraper');
+    scraper();
+  });
+}
 
+// Then, scrape the news every 2.5 hours
+// 9000000 ms
 //CHANGE TO SETINTERVAL
 setInterval(function(){
   Entity.remove({}, function(err){
