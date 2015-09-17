@@ -7,25 +7,21 @@
   </head>
 
   <body>
-
+  <div class = "content-container">
     <div class="page-header">
       <h1>Who's in the News? <small>An RSS News Scraper and Sentiment Analysis Micro-App</small></h1>
     </div>
 
-    <div class="btn-group" data-toggle="buttons">
-    <p>
-      Click circles to search Google News
-    </p>
-      <label class="btn btn-default active" id="all">
-        <input type="radio" name="options"> View All
-      </label>
-      <label class="btn btn-default" id="sentiment">
-        <input type="radio" name="options"> Group By Sentiment
-      </label>
-
-    </div>
+   
+    <button type="button" class="btn btn-default" id="sentiment"> 
+    Toggle Group by Sentiment
+    </button>
     
     <div id="chart"></div>
   
+    <div class="footer">
+      <p>Andrew R. Weber | 2015 | <a href="https://www.linkedin.com/in/andrewrweber">LinkedIn | <a href="https://github.com/andrewrweber">GitHub</a></p>
+    </div>
+  </div>
   </body>
 </html>
