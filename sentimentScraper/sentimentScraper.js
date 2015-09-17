@@ -69,7 +69,7 @@ var addOrUpdateEntity = function(text, type){
         entity.sentiment = 'negative';
       }
       else if(entity.negCount < entity.posCount){
-        entity.sentiment = 'postive';
+        entity.sentiment = 'positive';
       }
       else{
         entity.sentiment = 'neutral';
