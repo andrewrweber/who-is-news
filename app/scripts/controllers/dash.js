@@ -3,15 +3,17 @@
 angular.module('whoIsNews')
   .controller('DashboardCtrl',['$scope', 'Entities', function ($scope, Entities) {
     
+    var currentGrouping = 'all';
+    
     $scope.data = {};
 
     Entities.then(function(response){
-      drawChart(response.data);
+      drawD3Chart(response.data);
     });
 
-    var drawChart = function(data){
+    var drawD3Chart = function(data){
 
-      var width = 1000, height = 650;
+      var width = 1000, height = 525;
       var fill = d3.scale.ordinal()
         .domain(["positive", "negative", "neutral"])
         .range(["green", "red", "blue"])
@@ -70,12 +72,16 @@ angular.module('whoIsNews')
 
       draw('all');
 
-      // nodes.append("title")
-      //   .attr("dx", function(d){return -20})
-      //   .text("HELLO!!!")
-
       $( ".btn" ).click(function() {
-        draw(this.id);
+        if(currentGrouping === 'all'){
+          draw('sentiment');
+          currentGrouping = 'sentiment';
+        }
+        else{
+          draw('all');
+          currentGrouping = 'all';
+        }
+        
       });
 
       function draw (varname) {
@@ -90,8 +96,6 @@ angular.module('whoIsNews')
         return function (e) {
           for (var i = 0; i < data.length; i++) {
             var o = data[i];
-            //console.log("O: ", o);
-            //console.log("foci[o[varname]]: ", foci[o[varname]]);
             var f = foci[o[varname]];
             o.y += (f.y - o.y) * e.alpha;
             o.x += (f.x - o.x) * e.alpha;
@@ -129,7 +133,7 @@ angular.module('whoIsNews')
           html : true,
           content: function() { 
             return "Negative Mentions: " + d.negCount + "<br/>Positive Mentions: " + d.posCount + 
-                   "<br/>Total Mentions: " + d.count; }
+                   "<br/>Total Mentions: " + d.count + "<br/> <strong>Click to Search</strong>"; }
         });
         $(this).popover('show')
       }

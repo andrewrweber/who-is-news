@@ -43,32 +43,39 @@ function processEntities(error, response, body) {
 var addOrUpdateEntity = function(text, type){
   Entity.findOrCreate({name: text}, function(err, entity, created) {
     if(err){
-      throw err;
+      return handleError(err);
     }
     else{
       if(created){
         entity.sentiment = type;
-
         entity.count = 1;
         entity.negCount = 0;
         entity.posCount = 0;
-        if(type === 'positive'){
-          entity.posCount++;
-        }
-        else if(type === 'negative'){
-          entity.negCount++;
-        }
       }
 
       else{
         entity.count++;
-        if(type === 'positive'){
-          entity.posCount++;
-        }
-        if(type === 'negative'){
-          entity.negCount++;
-        }
       }
+      
+      if(type === 'positive'){
+        entity.posCount++;
+      }
+      else if(type === 'negative'){
+        entity.negCount++;
+      }
+
+      // Check to see if overall sentiment is positive, negative, or neutral
+      if(entity.negCount > entity.posCount){
+        entity.sentiment = 'negative';
+      }
+      else if(entity.negCount < entity.posCount){
+        entity.sentiment = 'postive';
+      }
+      else{
+        entity.sentiment = 'neutral';
+      }
+
+      //Save newly created or updated entity to db
       entity.save(function(err){
         if (err) return handleError(err);
         //saved.
