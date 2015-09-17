@@ -1,0 +1,20 @@
+
+<h1>Who is News?</h1>
+<div class="container">
+  
+  <table >
+    <tr class="table-head">
+      <td>Name:</td>
+      <td class="attr">Total</td>
+      <td class="attr">Negative</td>
+      <td class="attr">Positive</td>
+    </tr>
+    <tr ng-repeat="entity in data.entities | filter: minCountFilter | orderBy: '-count' | limitTo: '15'">
+      <td>{{entity.name}}</td>
+      <td class="attr">{{entity.count}}</td>
+      <td class="attr">{{entity.negCount}}</td>
+      <td class="attr">{{entity.posCount}}</td>
+    </tr>
+  </table>
+
+</div>
