@@ -4,10 +4,14 @@ angular.module('whoIsNews')
   .controller('DashboardCtrl',['$scope', 'Entities', function ($scope, Entities) {
     
     var currentGrouping = 'all';
+    $scope.noRecords = false;
     
     $scope.data = {};
 
     Entities.then(function(response){
+      if(response.data.length === 0){
+        $scope.noRecords = true;
+      }
       drawD3Chart(response.data);
     });
 
