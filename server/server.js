@@ -29,15 +29,15 @@ if(process.env.DEPLOY && process.env.DEPLOY === 'production'){
   });
 }
 
-// Then, scrape the news every 2.5 hours
-// 9000000 ms
+// Then, scrape the news every 5 hours
+// 18000000 ms
 //CHANGE TO SETINTERVAL
 setInterval(function(){
   Entity.remove({}, function(err){
     console.log('starting scraper');
     scraper();
   });
-}, 9000000)
+}, 18000000)
 
 app.get('/api/entities', function(req, res){
   console.log('sending cache');
