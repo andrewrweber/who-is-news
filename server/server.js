@@ -25,19 +25,18 @@ Entity.find({}, null, {sort: '-count', limit:275}, function(err, data){
 if(process.env.DEPLOY && process.env.DEPLOY === 'production'){
   Entity.remove({}, function(err){
     console.log('starting scraper');
-    scraper();
+    
   });
 }
 
-// Then, scrape the news every 2.5 hours
-// 9000000 ms
-//CHANGE TO SETINTERVAL
+// Then, scrape the news every 6 hours
+// 21600000 ms
 setInterval(function(){
   Entity.remove({}, function(err){
     console.log('starting scraper');
     scraper();
   });
-}, 9000000)
+}, 21600000)
 
 app.get('/api/entities', function(req, res){
   console.log('sending cache');

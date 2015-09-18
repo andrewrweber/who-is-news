@@ -28,7 +28,6 @@ function processEntities(error, response, body) {
     var info = JSON.parse(body);
     
     var entitiesArr = info.entities;
-
     for(var entity in entitiesArr){
       var text = entitiesArr[entity].text;
       var type = entitiesArr[entity].sentiment.type;
