@@ -17,7 +17,7 @@ angular.module('whoIsNews')
 
     var drawD3Chart = function(data){
 
-      var width = 1000, height = 525;
+      var width = 1000, height = 575;
       var fill = d3.scale.ordinal()
         .domain(["positive", "negative", "neutral"])
         .range(["green", "red", "blue"])
